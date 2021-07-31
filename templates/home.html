@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+   <html lang="en">
+   <head>
+      <header style="background-color: black;"></header>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>TodoApp</title>
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+      <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+   </head>
+   <body style="background-color:rgb(252, 132, 172);">
+      <div style="margin-top: 50px;" class="ui container" >
+      <h1 class="ui center aligned header" style="font-style:Copperplate; font-size: xx-large;font-weight:bolder;">To-Do</h1>
+      {% block main %}
+      <form class="ui form" action="/" method = "POST">
+      <div class="field">
+         <p style="font-size:larger;font-style:initial">TO-DO:</p><input type="text" name="todo" id="todo" placeholder="Enter todo..." required><br><br>
+         <p style="font-size:larger;font-style:initial"> START-TIME:</p> <input type="datetime-local" name="start" id="start" required><br><br>
+         <p style="font-size:larger;font-style:initial">END-TIME:</p> <input type="datetime-local" name="end" id="end" required><br>
+         <br>
+         <input class="ui yellow button" type="submit" value="Submit">
+      </div>
+      </form>
+      <hr>
+         {% for todo in Todo %}
+         <div class="ui segment" style="background-color: rgb(100, 255, 239);">
+              <h2 class="ui big header">Task{{todo.num}}: {{todo.todo}} </h2>
+               <h2>Start-Time: {{todo.start}} </h2>
+               <h2>End-Time: {{todo.end}} </h2>
+               {% if todo.complete == False %}
+                  <span class="ui gray label">Not Completed</span>
+               {% else %}
+                  <span class="ui green label">Completed</span>
+               {% endif %}
+               <a class="ui blue button" href="/update/{{todo.num}}">Update</a>
+               <a class="ui red button" href="/delete/{{todo.num}}">Delete</a>
+               <hr>
+         </div>
+         {% endfor %}      
+      {% endblock main %}
+   </div>   </div>
+      <footer style="background-color: black; color: antiquewhite; text-align: center; position:fixed; bottom: 0;width:100%;"> copyrights 2020</footer>
+   </body>
+</html>
+   
